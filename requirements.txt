@@ -1,0 +1,11 @@
+# requirements.txt
+pandas
+openpyxl
+numpy
+python-dotenv
+langchain
+langchain-openai
+langchain-community
+openai
+langchain-ollama
+pyyaml

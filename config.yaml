@@ -1,0 +1,99 @@
+# config.yaml
+# Rake Planning Optimization Configuration
+
+# Rake Types
+rake_types:
+  1:
+    name: "CONCORD RAKE"
+    min_weight: 61000
+    max_weight: 63000
+    total_capacity: 2650000
+    no_wagons: 44
+  2:
+    name: "JUMBO RAKE"
+    min_weight: 63000
+    max_weight: 65000
+    total_capacity: 3750000
+    no_wagons: 58
+
+# Wagon Constraints
+wagon_constraints:
+  narrow:
+    id: 1
+    name: "NARROW"
+    min_width: 900
+    max_width: 1199
+    max_coils: 4
+  wider:
+    id: 2
+    name: "WIDER"
+    min_width: 1200
+    max_width: 1499
+    max_coils: 3
+  extra:
+    id: 3
+    name: "EXTRA"
+    min_width: 1500
+    max_width: 2000
+    max_coils: 2
+
+# Valid Width Combinations
+valid_combinations:
+  - id: 1
+    narrow: 1
+    wider: 2
+    extra: 0
+    remark: "2 wider + 1 narrow"
+  - id: 2
+    narrow: 2
+    wider: 1
+    extra: 0
+    remark: "1 wider + 2 narrow"
+  - id: 3
+    narrow: 0
+    wider: 3
+    extra: 0
+    remark: "3 wider"
+  - id: 4
+    narrow: 4
+    wider: 0
+    extra: 0
+    remark: "4 narrow"
+  - id: 5
+    narrow: 0
+    wider: 0
+    extra: 2
+    remark: "2 extra"
+  - id: 6
+    narrow: 1
+    wider: 1
+    extra: 1
+    remark: "fallback mixed 1 + 1 + 1"
+
+# Input/Output Settings
+input:
+  excel_path: "excel/RakeProjectionPlanner_Input.xlsx"
+  material_sheet: "Material"
+  rake_constraint_sheet: "Rake Constraint"
+  wagon_constraint_sheet: "Wagon Constraint"
+  width_combinations_sheet: "Width Range Combinations"
+  planning_parameter_sheet: "Planning Parameter"
+
+output:
+  excel_path: "excel/RakeProjectionPlanner_Output_Optimized.xlsx"
+  mapping_sheet: "WagonWiseOrderCoilMapping"
+  metrics_sheet: "Optimization_Metrics"
+  summary_sheet: "Wagon_Summary"
+
+# Optimization Settings
+optimization:
+  max_coils_per_wagon: 4
+  target_utilization: 0.95
+  weight_tolerance: 0.05
+
+# LLM Settings
+llm:
+  preferred_model: "ollama"  # "ollama" or "openai"
+  ollama_model: "llama3.2"
+  openai_model: "gpt-4o-mini"
+  temperature: 0
